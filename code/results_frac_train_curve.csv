@@ -1,0 +1,9 @@
+bbbp,scaffold,classification,logreg,mean-roc_auc_score,train,0.99271137026239065,valid,0.67889774719640084,frac_train,0.1
+bbbp,scaffold,classification,logreg,mean-roc_auc_score,train,0.98252442002442009,valid,0.51064709712616363,frac_train,0.2
+bbbp,scaffold,classification,logreg,mean-roc_auc_score,train,0.98629520536737025,valid,0.76530865010870275,frac_train,0.3
+bbbp,scaffold,classification,logreg,mean-roc_auc_score,train,0.9842098214285715,valid,0.8165528461098398,frac_train,0.4
+bbbp,scaffold,classification,logreg,mean-roc_auc_score,train,0.98373915477190033,valid,0.83476902201846181,frac_train,0.5
+bbbp,scaffold,classification,logreg,mean-roc_auc_score,train,0.98386608089683381,valid,0.8554767353786763,frac_train,0.6
+bbbp,scaffold,classification,logreg,mean-roc_auc_score,train,0.98123919570557727,valid,0.85989468022564952,frac_train,0.7
+bbbp,scaffold,classification,logreg,mean-roc_auc_score,train,0.98089176888066043,valid,0.83689690995627064,frac_train,0.8
+bbbp,scaffold,classification,logreg,mean-roc_auc_score,train,0.98251316107133468,valid,0.70131997302244919,frac_train,0.9

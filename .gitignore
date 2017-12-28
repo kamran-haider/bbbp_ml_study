@@ -1,4 +1,6 @@
 attic/
+.DS_Store
+.*
 *.zip
 sstmap/tests/new_gist_tests
 test_build.sh
