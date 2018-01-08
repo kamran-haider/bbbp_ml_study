@@ -29,7 +29,6 @@ class Network(object):
         """
         self.layer_dims = layer_dims
         self.caches = []
-        self.parameters = self.initialize_params()
 
     def initialize_params(self, scaling_factor=0.01):
         """Initialize parameters of the network.
@@ -302,10 +301,10 @@ class Network(object):
         params : dict
             Updated parameters        
         """
-
+        updated_params = {}
         L = len(params) // 2 # number of layers in the neural network
         for layer in range(1, L+1):
-            params["W" + str(layer)] = params["W" + str(layer)] - (eta * grads["dW" + str(layer)])
-            params["b" + str(layer)] = params["b" + str(layer)] - (eta * grads["db" + str(layer)])
+            updated_params["W" + str(layer)] = params["W" + str(layer)] - (eta * grads["dW" + str(layer)])
+            updated_params["b" + str(layer)] = params["b" + str(layer)] - (eta * grads["db" + str(layer)])
  
-        return params
+        return updated_params
