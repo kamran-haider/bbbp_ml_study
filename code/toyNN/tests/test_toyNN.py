@@ -4,22 +4,7 @@ from numpy.testing import assert_array_almost_equal, assert_array_equal
 import h5py
 from toyNN.models import BasicDeepModel
 from toyNN.layers import *
-
-def load_test_data(train_data, test_data):
-    train_dataset = h5py.File(train_data, "r")
-    train_set_x_orig = np.array(train_dataset["train_set_x"][:])  # your train set features
-    train_set_y_orig = np.array(train_dataset["train_set_y"][:])  # your train set labels
-
-    test_dataset = h5py.File(test_data, "r")
-    test_set_x_orig = np.array(test_dataset["test_set_x"][:])  # your test set features
-    test_set_y_orig = np.array(test_dataset["test_set_y"][:])  # your test set labels
-
-    classes = np.array(test_dataset["list_classes"][:])  # the list of classes
-
-    train_set_y_orig = train_set_y_orig.reshape((1, train_set_y_orig.shape[0]))
-    test_set_y_orig = test_set_y_orig.reshape((1, test_set_y_orig.shape[0]))
-
-    return train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes
+from toyNN.utils import *
 
 def test_basic_deep():
     """
@@ -42,7 +27,7 @@ def test_basic_deep():
     layers = [Input(input_layer_nodes), ReLU(20), ReLU(7), ReLU(5), Sigmoid(1)]
 
     nn = BasicDeepModel(train_x, train_y, layers, weight_initialization="custom")
-    nn.train(learning_rate=0.0075, n_epochs=200)
-    assert_array_almost_equal(ref_costs, nn.costs, decimal=8)
+    nn.fit(learning_rate=0.0075, n_epochs=200)
+    assert_array_almost_equal(ref_costs, [nn.costs[0], nn.costs[100]], decimal=8)
 
 

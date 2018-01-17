@@ -1,3 +1,9 @@
+import os
+from toyNN.models import BasicDeepModel
+from toyNN.layers import *
+from toyNN.utils import *
+
+
 training_data = os.path.abspath("toyNN/tests/test_datasets/train_catvnoncat.h5")
 test_data = os.path.abspath("toyNN/tests/test_datasets/test_catvnoncat.h5")
 train_x_orig, train_y, test_x_orig, test_y, classes = load_test_data(training_data, test_data)
@@ -31,17 +37,15 @@ layer_sizes = [input_layer_nodes, 20, 7, 5, 1]
 layers = [Input(input_layer_nodes), ReLU(20), ReLU(7), ReLU(5), Sigmoid(1)]
 np.random.seed(1)
 
-nn = Network(train_x, train_y, layers, weight_initialization="custom")
-nn.train(learning_rate=0.0075, n_epochs=2500)
-"""
-A = nn.X
-print(A.shape)
-for i in xrange(1, len(nn.layer_sizes)):
-    print("Layer: ", i)
-    #print(nn.W[i].shape)
-    #print(nn.b[i].shape)
-    L = nn.layer_types[i]()
-    A = L.forward_pass(A)
-    print(A.shape)
-"""
+model = BasicDeepModel(train_x, train_y, layers, weight_initialization="custom")
+model.fit(learning_rate=0.0075, n_epochs=2500)
+predictions = model.predict(test_x)
+m = test_x.shape[1]
+p = np.zeros((1,m))
+for i in range(0, predictions.shape[1]):
+    if predictions[0, i] > 0.5:
+        p[0, i] = 1
+    else:
+        p[0, i] = 0
 
+print("Accuracy: "  + str(np.sum((p == test_y)/m)))
