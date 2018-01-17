@@ -1,3 +1,4 @@
+from __future__ import division
 import os
 from toyNN.models import BasicDeepModel
 from toyNN.layers import *
@@ -35,13 +36,14 @@ print ("test_x's shape: " + str(test_x.shape))
 input_layer_nodes = num_px * num_px * 3
 layer_sizes = [input_layer_nodes, 20, 7, 5, 1]
 layers = [Input(input_layer_nodes), ReLU(20), ReLU(7), ReLU(5), Sigmoid(1)]
-np.random.seed(1)
+#np.random.seed(1)
 
-model = BasicDeepModel(train_x, train_y, layers, weight_initialization="custom")
-model.fit(learning_rate=0.0075, n_epochs=2500)
+model = BasicDeepModel(train_x, train_y, layers, weight_initialization="he")
+model.fit(learning_rate=0.0075, n_epochs=15000)
 predictions = model.predict(test_x)
 m = test_x.shape[1]
 p = np.zeros((1,m))
+
 for i in range(0, predictions.shape[1]):
     if predictions[0, i] > 0.5:
         p[0, i] = 1

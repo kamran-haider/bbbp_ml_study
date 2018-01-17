@@ -29,15 +29,17 @@ def initialize_weights(layers, scaling_method="constant", scaling_constant=0.01)
     for l in range(1, num_layers):
         scaling_factor = supported_scaling["constant"]
         if scaling_method not in ["constant", "custom"]:
-            scaling_factor = np.sqrt(supported_scaling[scaling_method]/layer_sizes[l])
+            scaling_factor = supported_scaling[scaling_method]
 
         if scaling_method == "custom":
-            layers[l].weights = np.random.randn(layer_sizes[l], layer_sizes[l - 1])/np.sqrt(layer_sizes[l-1])
+            layers[l].weights = np.random.randn(layer_sizes[l], layer_sizes[l - 1])  /np.sqrt(layer_sizes[l-1])
             layers[l].biases = np.zeros((layer_sizes[l], 1))
-        else:
+        elif scaling_method == "constant":
             layers[l].weights = np.random.randn(layer_sizes[l], layer_sizes[l - 1]) * scaling_factor
             layers[l].biases = np.zeros((layer_sizes[l], 1))
-
+        else:
+            layers[l].weights = np.random.randn(layer_sizes[l], layer_sizes[l - 1]) * np.sqrt(scaling_factor/layer_sizes[l-1])
+            layers[l].biases = np.zeros((layer_sizes[l], 1))
 
 
 def cross_entropy_loss(y, y_hat):
@@ -136,7 +138,6 @@ def relu_prime(z):
     """
     sigma_prime = 1.0 * (z > 0)
     return sigma_prime
-
 
 def load_test_data(train_data, test_data):
     train_dataset = h5py.File(train_data, "r")
