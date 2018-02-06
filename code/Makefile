@@ -1,2 +1,3 @@
+
 test:
-	python -m pytest toyNN
+	python -m pytest ann
