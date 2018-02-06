@@ -18,9 +18,3 @@ This commmand will generate file: `../predictions/predictions_logistic.csv` whic
 python keras_dnn_predict_bbb.py
 ```
 This commmand will generate files: `../predictions/predictions_ann_fp.csv` and ``../predictions/predictions_ann_desc.csv` which contain results for artificial neural network classifier for the test dataset using molecular descriptors and morgan fingerprints. In addition, it will also create figures in `../notes/slides.pptx` slide # 9.
-
-## Slides
-Slides are present in `../notes/slides.pptx`
-
-## Additional code
-I created a bare-bones implementation of a deep layer artifical neural network, which is packaged as `ann` module in `../code/ann`. Although, this implementation was not used to generate the predictions. It is more a work in progress to build a prototype  a deep layer neural network method to prediction blood brain barrier crossing predictions from various representations of small molecules.  
